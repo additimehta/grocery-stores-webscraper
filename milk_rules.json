@@ -1,0 +1,9 @@
+{
+  "website": "https://www.loblaws.ca",
+  "search": "milk",
+  "category": "Milk",
+  "sizes_ml": [1000, 4000],
+  "allowed_names": ["2% Milk", "2% Partly Skimmed Milk", "Partly Skimmed Milk 2%", "2% Partly Skimmed Milk 2% M.F."],
+  "expected_store": null,
+  "max_scrolls": 12
+}

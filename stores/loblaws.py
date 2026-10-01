@@ -3,6 +3,30 @@ import re
 from decimal import Decimal
 from urllib.parse import urlencode, urlparse
 
+CONDITIONAL_OFFER_PATTERN = re.compile(
+    r'''
+    \b (
+        min \s* \d          # Minimum purchase, e.g. MIN 2
+        | members?          # Member-only price
+        | buy \s* \d        # Buy a required quantity
+        | \d+ \s* for \b    # Multi-buy wording, e.g. 2 for
+        | \d+ \s* / \s* \$  # Multi-buy notation, e.g. 2/$
+        | subscribe         # Subscription offer
+    ) \b
+    ''',
+    re.IGNORECASE | re.VERBOSE,
+)
+
+# Examples: "$3", "$3.64", "sale: $2.99".
+SINGLE_PRICE_PATTERN = re.compile(
+    r'''
+    (?:sale \s* :? \s*)?          # Optional sale label
+    \$ \s*                       # Dollar sign
+    (?P<price>\d+(?:\.\d{2})?)    # Dollars, optionally with two decimal places
+    ''',
+    re.IGNORECASE | re.VERBOSE,
+)
+
 EXTRACT_CARDS = r'''() => {
   const text = (root, id) => root.querySelector(`[data-testid="${id}"]`)?.textContent.trim() || '';
   return [...document.querySelectorAll('[data-testid="product-title"]')].map(title => {
@@ -28,16 +52,14 @@ EXTRACT_CARDS = r'''() => {
 def single_price(card):
     # Skip membership/multi-buy offers instead of mistaking their conditional price
     # for what anybody can pay for one package.
-    if card.get('non_member') or re.search(
-        r'\b(min\s*\d|members?|buy\s*\d|\d+\s*for\b|\d+\s*/\s*\$|subscribe)\b',
-        card.get('card_text', '') + ' ' + card.get('offer_text', ''), re.I
-    ):
+    offer_text = card.get('card_text', '') + ' ' + card.get('offer_text', '')
+    if card.get('non_member') or CONDITIONAL_OFFER_PATTERN.search(offer_text):
         return None
     price_text = card.get('sale') or card.get('regular', '')
-    match = re.fullmatch(r'(?:sale\s*:?\s*)?\$\s*(\d+(?:\.\d{2})?)', price_text, re.I)
+    match = SINGLE_PRICE_PATTERN.fullmatch(price_text)
     if not match:
         return None
-    price = Decimal(match[1])
+    price = Decimal(match['price'])
     return price if price > 0 else None
 
 def search(page, store_config, search_term):

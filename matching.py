@@ -2,6 +2,20 @@
 import re
 from decimal import Decimal, InvalidOperation
 
+# Examples: "1 l", "500g", "1.89 litres", "12 count".
+PACKAGE_SIZE_PATTERN = re.compile(
+    r'''
+    (?P<amount>\d+(?:\.\d+)?)  # Whole number or decimal quantity
+    \s*                        # Optional space before the unit
+    (?P<unit>
+        ml | millilitres? | l | litres? | liters?
+        | g | grams? | kg | kilograms?
+        | ea | count | dozen | bags?
+    )
+    ''',
+    re.VERBOSE,
+)
+
 
 def normalize_name(name):
     return ' '.join(name.casefold().split())
@@ -9,12 +23,12 @@ def normalize_name(name):
 
 def parse_size(label):
     """Return quantity and base unit. Ignore the unit-price text after a comma."""
-    match = re.fullmatch(
-        r'(\d+(?:\.\d+)?)\s*(ml|millilitres?|l|litres?|liters?|g|grams?|kg|kilograms?|ea|count|dozen|bags?)',
-        label.split(',')[0].strip().casefold())
+    package_size = label.split(',')[0].strip().casefold()
+    match = PACKAGE_SIZE_PATTERN.fullmatch(package_size)
     if not match:
         return None
-    amount, unit = Decimal(match[1]), match[2]
+    amount = Decimal(match['amount'])
+    unit = match['unit']
     if unit in ('l', 'litre', 'litres', 'liter', 'liters'):
         return amount * 1000, 'ml'
     if unit in ('kg', 'kilogram', 'kilograms'):

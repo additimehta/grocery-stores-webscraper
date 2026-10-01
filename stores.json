@@ -1,0 +1,9 @@
+[
+  {
+    "id": "loblaws",
+    "adapter": "loblaws",
+    "website": "https://www.loblaws.ca",
+    "expected_store": null,
+    "max_scrolls": 12
+  }
+]

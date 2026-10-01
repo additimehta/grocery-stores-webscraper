@@ -1,57 +1,63 @@
 # Grocery Stores Webscraper
 
-Python + Playwright scripts for collecting store prices into CSV for CS348. No frontend or API server is needed.
+A shared Python scraper for the CS348 grocery-price project. Product rules live in JSON. Store-specific HTML extraction lives in an adapter. No frontend is required.
 
-## Setup (Mac, Python 3.10+)
+## Setup and run
+
+Use Python 3.10 or newer. From this repository:
 
 ```bash
 python3 -m venv .venv
 source .venv/bin/activate
 python -m pip install -r requirements.txt
 python -m playwright install chromium
+python scraper.py --check-config
+python scraper.py --headed
 ```
 
-## Milk search workflow
+The milk-only script and original URL-list workflow have been replaced by this command.
 
-```bash
-python milk_search.py --headed
-```
+## Files
 
-The input is `milk_rules.json`. Supply the website, search term, accepted product names and package sizes, rather than individual product URLs. Only the Loblaws website adapter is implemented.
+- `scraper.py`: reads configuration, runs each search, selects results and writes CSV.
+- `products.json`: 110 product/size entries extracted from the supplied Statistics Canada CSV, Table 18-10-0245-01. Historical prices are not copied. Three entries are enabled: milk 1 L, milk 4 L and cheddar block cheese. Milk 2 L is retained but disabled by preference. The other 106 entries need matching/comparison rules before enabling.
+- `stores.json`: configured stores, website, optional expected location and scrolling limit.
+- `stores/loblaws.py`: loads and reads Loblaws search cards with Playwright, returning a shared product format.
+- `matching.py`: matches names, converts units and selects the lowest comparable price.
 
-The default rules select regular 2% dairy milk in **1 L and 4 L** sizes. Brands can differ. The cheapest qualifying package is selected separately for each size. Exact accepted names prevent almond milk, chocolate milk, cream, other fat percentages, and specialty milk such as organic, lactose-free, protein-enriched or microfiltered products from slipping through. This is deliberately conservative: legitimate products with different names may also be excluded. Extend `allowed_names` after reviewing their actual listings.
+## How it works
 
-## How the implementation works
+1. Read enabled product rules and configured stores. Unknown store adapters fail clearly.
+2. Open a store search page. Playwright runs the website's JavaScript and reads product cards. Searches are reused when several rules use the same term, so both milk sizes share one search.
+3. Reject unavailable products, unknown/ambiguous prices and visibly conditional membership or multi-buy offers. Unconditional sales can qualify. The offer checks are conservative and based on the displayed card text.
+4. Match against each rule's accepted names and size constraints. Exact names avoid including flavoured, shredded or specialty variants by accident, but may miss legitimate unfamiliar names. Review live names before extending a rule.
+5. Compare prices with Decimal, before rounding. Select one product per enabled rule per configured store. Break price ties by brand and product ID.
+6. Save results to `output/StorePrices.csv`. Save extracted eligible-price candidates, selected rows and unmatched rules in `output/StorePrices.audit.json`. If a rule has no match, do not replace an existing CSV. Navigation/browser failures also leave the CSV unchanged, but may occur before an audit file is written.
 
-1. `load_rules()` reads and validates `milk_rules.json`.
-2. `collect_cards()` opens the Loblaws milk search in Chromium. Playwright runs the site's JavaScript. It reads the selected store from the page, then extracts the product cards using inspected `data-testid` attributes. It scrolls to collect more cards, deduplicates by product URL, and stops after three unchanged scans or the configured scroll limit.
-3. `size_ml()` reads only the package size before the comma. It converts `1 l` and `1000 ml` to 1000, and `4 l` to 4000. Unit prices such as `$0.16/100ml` are not package sizes. Unknown sizes and ambiguous multi-packs are rejected.
-4. `single_price()` reads the displayed sale price when present, otherwise the regular price. It rejects visible membership and multi-buy conditions, non-member-price layouts, zero/missing/ambiguous prices. Unconditional single-package sales are allowed. This is a conservative text-based check, not a general promotions engine.
-5. `select_cheapest()` checks availability, exact accepted product name, package size and price. It maintains a separate minimum for each size. It uses Python `Decimal` for price comparisons and a stable brand/product-ID tie break.
-6. `write_output()` writes two selected rows to `output/StorePrices.csv` using Python's built-in `csv` module. The actual store, timestamp, product name, brand, size, price, URL and selection scope are included. Collected cards are saved separately in `output/StorePrices.candidates.json` for inspection.
+## Current product rules
 
-If either size has no qualifying result, the command fails and leaves the previous CSV unchanged. It does not invent a price or silently replace missing 1 L milk with another size. Check the terminal exit status rather than assuming an older CSV is fresh.
+Milk: regular 2% dairy milk, any brand, exact 1 L and 4 L packages compared separately. Exclude other fat percentages, plant-based/flavoured and specialty milk.
 
-## Store and coverage
+Cheese: plain cheddar blocks, any brand, 400–800 g packages, compared per 500 g. Accepted cheddar names are deliberately explicit. Shredded, sliced, flavoured and spreadable cheese names are not accepted.
 
-The script records whichever store the website selected; it does not choose a local store automatically. Set `expected_store` to an exact store name to fail if the page selects a different store. Leaving it `null` accepts the store shown on the page and records its name.
+Example: a 400 g block at $4 compares as $5 per 500 g. An 800 g block at $7 compares as $4.375 per 500 g, so the 800 g block wins even though its checkout price is higher. The exported comparison is rounded to cents; selection uses the unrounded value. The CSV retains both package price and comparison price.
 
-The result means **cheapest qualifying product among collected search cards**, not a verified minimum across the entire store. Search ranking, pagination, lazy loading, promotions and availability can affect coverage. The script scrolls but does not implement every possible pagination control. Membership or multi-buy products are skipped entirely even when a usable regular price might exist. Store names are not yet normalized to database store IDs.
+To add another product, edit its entry in `products.json`, add `allowed_names` and `comparison`, and set `enabled` to true. An exact rule uses `mode: exact`, a base `unit` (`ml`, `g`, `count`) and `amount`. A normalized rule also needs `min_amount` and `max_amount`. No new product-specific Python file is needed. Weight-priced produce/meat still needs adapter work to distinguish $/kg from estimated package prices; those catalog entries remain disabled.
 
-`StorePrices.csv` is intentionally separate from the existing national monthly `GroceryData.csv`. A current store quote and a Canada monthly figure describe different things. Import them into appropriate MySQL tables; do not overwrite the national dataset with store quotes.
+## Stores and limits
+
+Only Loblaws has an implemented adapter. A new website needs its own `search(page, store_config, search_term)` function and registration in `ADAPTERS`; it must return the same fields as Loblaws. Configuration alone cannot teach the scraper a new website's HTML.
+
+The Loblaws adapter records the selected location. Set `expected_store` in `stores.json` to fail if a different location is shown. It does not select a location automatically. Changing locations between searches fails rather than mixing prices.
+
+Results mean cheapest among collected qualifying search cards, not a guaranteed minimum across the entire store. The adapter scrolls until results stop growing or the limit is reached; it does not handle every pagination pattern. Store names are not yet database IDs. The catalog's national monthly average prices and scraped store quotes must remain separate in MySQL.
 
 ## Verification
-
-On October 1, 2026, the live cloud browser loaded the milk search for Loblaws Baseline Road. The implemented card-extraction selectors returned Neilson 2% Milk at 1 L / CAD 3.64, 2 L / CAD 5.48 and 4 L / CAD 6.44. Selection tests using these observed names/sizes/prices retain 1 L and 4 L and exclude 2 L. These observations are not promises of current or local prices.
 
 ```bash
 python -m unittest discover -s tests
 ```
 
-Tests cover separate size groups, cross-brand minimum selection, wrong milk types, unit normalization, conditional offers, sales and unavailable products. The original product-page parser tests also remain.
+The Loblaws selectors were inspected against live milk search cards on October 1, 2026. The shared comparison logic is tested for milk, cheddar normalization, exclusions, units, offer conditions, reused searches, missing matches and CSV escaping.
 
-The full standalone Python browser launch/navigation/scroll sequence has **not** been tested end to end in the development environment because its Chromium download failed. Live selector inspection and Python selection tests verify those stages separately. Test the command locally before relying on automated collection.
-
-## Original product-URL script
-
-`python scraper.py --headed` still runs the original `products.json` URL workflow and writes `output/GroceryData.csv`. Its sample eggs page's Product JSON-LD was verified separately in the cloud browser. It does not apply the milk constraints. Use `milk_search.py` for the new constrained search.
+Full standalone browser execution remains unverified because the Chromium download failed in the development environment. Cheddar search has not been verified live. Automated tests use synthetic and previously observed sample values; they do not establish complete store coverage or current prices. Run locally before relying on collection.

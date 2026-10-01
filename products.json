@@ -1,6 +1,925 @@
 [
   {
-    "category": "eggs",
-    "url": "https://www.loblaws.ca/en/grade-a-large-eggs/p/20814294001_EA"
+    "id": "beef_stewing_cuts_per_kilogram",
+    "category": "Beef stewing cuts",
+    "source_size": "per kilogram",
+    "search": "beef stewing cuts",
+    "enabled": false,
+    "review_note": "Confirm matching names and package/comparison rules before enabling."
+  },
+  {
+    "id": "beef_striploin_cuts_per_kilogram",
+    "category": "Beef striploin cuts",
+    "source_size": "per kilogram",
+    "search": "beef striploin cuts",
+    "enabled": false,
+    "review_note": "Confirm matching names and package/comparison rules before enabling."
+  },
+  {
+    "id": "beef_top_sirloin_cuts_per_kilogram",
+    "category": "Beef top sirloin cuts",
+    "source_size": "per kilogram",
+    "search": "beef top sirloin cuts",
+    "enabled": false,
+    "review_note": "Confirm matching names and package/comparison rules before enabling."
+  },
+  {
+    "id": "beef_rib_cuts_per_kilogram",
+    "category": "Beef rib cuts",
+    "source_size": "per kilogram",
+    "search": "beef rib cuts",
+    "enabled": false,
+    "review_note": "Confirm matching names and package/comparison rules before enabling."
+  },
+  {
+    "id": "ground_beef_per_kilogram",
+    "category": "Ground beef",
+    "source_size": "per kilogram",
+    "search": "ground beef",
+    "enabled": false,
+    "review_note": "Confirm matching names and package/comparison rules before enabling."
+  },
+  {
+    "id": "pork_loin_cuts_per_kilogram",
+    "category": "Pork loin cuts",
+    "source_size": "per kilogram",
+    "search": "pork loin cuts",
+    "enabled": false,
+    "review_note": "Confirm matching names and package/comparison rules before enabling."
+  },
+  {
+    "id": "pork_rib_cuts_per_kilogram",
+    "category": "Pork rib cuts",
+    "source_size": "per kilogram",
+    "search": "pork rib cuts",
+    "enabled": false,
+    "review_note": "Confirm matching names and package/comparison rules before enabling."
+  },
+  {
+    "id": "pork_shoulder_cuts_per_kilogram",
+    "category": "Pork shoulder cuts",
+    "source_size": "per kilogram",
+    "search": "pork shoulder cuts",
+    "enabled": false,
+    "review_note": "Confirm matching names and package/comparison rules before enabling."
+  },
+  {
+    "id": "whole_chicken_per_kilogram",
+    "category": "Whole chicken",
+    "source_size": "per kilogram",
+    "search": "whole chicken",
+    "enabled": false,
+    "review_note": "Confirm matching names and package/comparison rules before enabling."
+  },
+  {
+    "id": "chicken_breasts_per_kilogram",
+    "category": "Chicken breasts",
+    "source_size": "per kilogram",
+    "search": "chicken breasts",
+    "enabled": false,
+    "review_note": "Confirm matching names and package/comparison rules before enabling."
+  },
+  {
+    "id": "chicken_thigh_per_kilogram",
+    "category": "Chicken thigh",
+    "source_size": "per kilogram",
+    "search": "chicken thigh",
+    "enabled": false,
+    "review_note": "Confirm matching names and package/comparison rules before enabling."
+  },
+  {
+    "id": "chicken_drumsticks_per_kilogram",
+    "category": "Chicken drumsticks",
+    "source_size": "per kilogram",
+    "search": "chicken drumsticks",
+    "enabled": false,
+    "review_note": "Confirm matching names and package/comparison rules before enabling."
+  },
+  {
+    "id": "bacon_500_grams",
+    "category": "Bacon",
+    "source_size": "500 grams",
+    "search": "bacon",
+    "enabled": false,
+    "review_note": "Confirm matching names and package/comparison rules before enabling."
+  },
+  {
+    "id": "wieners_400_grams",
+    "category": "Wieners",
+    "source_size": "400 grams",
+    "search": "wieners",
+    "enabled": false,
+    "review_note": "Confirm matching names and package/comparison rules before enabling."
+  },
+  {
+    "id": "salmon_per_kilogram",
+    "category": "Salmon",
+    "source_size": "per kilogram",
+    "search": "salmon",
+    "enabled": false,
+    "review_note": "Confirm matching names and package/comparison rules before enabling."
+  },
+  {
+    "id": "shrimp_300_grams",
+    "category": "Shrimp",
+    "source_size": "300 grams",
+    "search": "shrimp",
+    "enabled": false,
+    "review_note": "Confirm matching names and package/comparison rules before enabling."
+  },
+  {
+    "id": "canned_salmon_213_grams",
+    "category": "Canned salmon",
+    "source_size": "213 grams",
+    "search": "canned salmon",
+    "enabled": false,
+    "review_note": "Confirm matching names and package/comparison rules before enabling."
+  },
+  {
+    "id": "canned_tuna_170_grams",
+    "category": "Canned tuna",
+    "source_size": "170 grams",
+    "search": "canned tuna",
+    "enabled": false,
+    "review_note": "Confirm matching names and package/comparison rules before enabling."
+  },
+  {
+    "id": "meatless_burgers_226_grams",
+    "category": "Meatless burgers",
+    "source_size": "226 grams",
+    "search": "meatless burgers",
+    "enabled": false,
+    "review_note": "Confirm matching names and package/comparison rules before enabling."
+  },
+  {
+    "id": "milk_1_litre",
+    "category": "Milk",
+    "source_size": "1 litre",
+    "search": "milk",
+    "enabled": true,
+    "allowed_names": [
+      "2% Milk",
+      "2% Partly Skimmed Milk",
+      "Partly Skimmed Milk 2%",
+      "2% Partly Skimmed Milk 2% M.F."
+    ],
+    "comparison": {
+      "mode": "exact",
+      "unit": "ml",
+      "amount": 1000
+    }
+  },
+  {
+    "id": "milk_2_litres",
+    "category": "Milk",
+    "source_size": "2 litres",
+    "search": "milk",
+    "enabled": false,
+    "review_note": "Excluded by user preference: keep 1 L and 4 L milk."
+  },
+  {
+    "id": "milk_4_litres",
+    "category": "Milk",
+    "source_size": "4 litres",
+    "search": "milk",
+    "enabled": true,
+    "allowed_names": [
+      "2% Milk",
+      "2% Partly Skimmed Milk",
+      "Partly Skimmed Milk 2%",
+      "2% Partly Skimmed Milk 2% M.F."
+    ],
+    "comparison": {
+      "mode": "exact",
+      "unit": "ml",
+      "amount": 4000
+    }
+  },
+  {
+    "id": "soy_milk_1_89_litres",
+    "category": "Soy milk",
+    "source_size": "1.89 litres",
+    "search": "soy milk",
+    "enabled": false,
+    "review_note": "Confirm matching names and package/comparison rules before enabling."
+  },
+  {
+    "id": "nut_milk_1_89_litres",
+    "category": "Nut milk",
+    "source_size": "1.89 litres",
+    "search": "nut milk",
+    "enabled": false,
+    "review_note": "Confirm matching names and package/comparison rules before enabling."
+  },
+  {
+    "id": "cream_1_litre",
+    "category": "Cream",
+    "source_size": "1 litre",
+    "search": "cream",
+    "enabled": false,
+    "review_note": "Confirm matching names and package/comparison rules before enabling."
+  },
+  {
+    "id": "butter_454_grams",
+    "category": "Butter",
+    "source_size": "454 grams",
+    "search": "butter",
+    "enabled": false,
+    "review_note": "Confirm matching names and package/comparison rules before enabling."
+  },
+  {
+    "id": "margarine_907_grams",
+    "category": "Margarine",
+    "source_size": "907 grams",
+    "search": "margarine",
+    "enabled": false,
+    "review_note": "Confirm matching names and package/comparison rules before enabling."
+  },
+  {
+    "id": "block_cheese_500_grams",
+    "category": "Block cheese",
+    "source_size": "500 grams",
+    "search": "cheddar cheese",
+    "enabled": true,
+    "allowed_names": [
+      "Cheddar Cheese",
+      "Mild Cheddar Cheese",
+      "Medium Cheddar Cheese",
+      "Old Cheddar Cheese",
+      "Extra Old Cheddar Cheese",
+      "Marble Cheddar Cheese",
+      "White Cheddar Cheese",
+      "Mild Cheddar",
+      "Medium Cheddar",
+      "Old Cheddar",
+      "Extra Old Cheddar",
+      "Cheddar Cheese Block",
+      "Mild Cheddar Cheese Block",
+      "Medium Cheddar Cheese Block",
+      "Old Cheddar Cheese Block"
+    ],
+    "comparison": {
+      "mode": "normalized",
+      "unit": "g",
+      "amount": 500,
+      "min_amount": 400,
+      "max_amount": 800
+    }
+  },
+  {
+    "id": "yogurt_500_grams",
+    "category": "Yogurt",
+    "source_size": "500 grams",
+    "search": "yogurt",
+    "enabled": false,
+    "review_note": "Confirm matching names and package/comparison rules before enabling."
+  },
+  {
+    "id": "eggs_1_dozen",
+    "category": "Eggs",
+    "source_size": "1 dozen",
+    "search": "eggs",
+    "enabled": false,
+    "review_note": "Confirm matching names and package/comparison rules before enabling."
+  },
+  {
+    "id": "apples_per_kilogram",
+    "category": "Apples",
+    "source_size": "per kilogram",
+    "search": "apples",
+    "enabled": false,
+    "review_note": "Confirm matching names and package/comparison rules before enabling."
+  },
+  {
+    "id": "oranges_per_kilogram",
+    "category": "Oranges",
+    "source_size": "per kilogram",
+    "search": "oranges",
+    "enabled": false,
+    "review_note": "Confirm matching names and package/comparison rules before enabling."
+  },
+  {
+    "id": "oranges_1_36_kilograms",
+    "category": "Oranges",
+    "source_size": "1.36 kilograms",
+    "search": "oranges",
+    "enabled": false,
+    "review_note": "Confirm matching names and package/comparison rules before enabling."
+  },
+  {
+    "id": "bananas_per_kilogram",
+    "category": "Bananas",
+    "source_size": "per kilogram",
+    "search": "bananas",
+    "enabled": false,
+    "review_note": "Confirm matching names and package/comparison rules before enabling."
+  },
+  {
+    "id": "pears_per_kilogram",
+    "category": "Pears",
+    "source_size": "per kilogram",
+    "search": "pears",
+    "enabled": false,
+    "review_note": "Confirm matching names and package/comparison rules before enabling."
+  },
+  {
+    "id": "lemons_unit",
+    "category": "Lemons",
+    "source_size": "unit",
+    "search": "lemons",
+    "enabled": false,
+    "review_note": "Confirm matching names and package/comparison rules before enabling."
+  },
+  {
+    "id": "limes_unit",
+    "category": "Limes",
+    "source_size": "unit",
+    "search": "limes",
+    "enabled": false,
+    "review_note": "Confirm matching names and package/comparison rules before enabling."
+  },
+  {
+    "id": "grapes_per_kilogram",
+    "category": "Grapes",
+    "source_size": "per kilogram",
+    "search": "grapes",
+    "enabled": false,
+    "review_note": "Confirm matching names and package/comparison rules before enabling."
+  },
+  {
+    "id": "cantaloupe_unit",
+    "category": "Cantaloupe",
+    "source_size": "unit",
+    "search": "cantaloupe",
+    "enabled": false,
+    "review_note": "Confirm matching names and package/comparison rules before enabling."
+  },
+  {
+    "id": "strawberries_454_grams",
+    "category": "Strawberries",
+    "source_size": "454 grams",
+    "search": "strawberries",
+    "enabled": false,
+    "review_note": "Confirm matching names and package/comparison rules before enabling."
+  },
+  {
+    "id": "avocado_unit",
+    "category": "Avocado",
+    "source_size": "unit",
+    "search": "avocado",
+    "enabled": false,
+    "review_note": "Confirm matching names and package/comparison rules before enabling."
+  },
+  {
+    "id": "potatoes_4_54_kilograms",
+    "category": "Potatoes",
+    "source_size": "4.54 kilograms",
+    "search": "potatoes",
+    "enabled": false,
+    "review_note": "Confirm matching names and package/comparison rules before enabling."
+  },
+  {
+    "id": "potatoes_per_kilogram",
+    "category": "Potatoes",
+    "source_size": "per kilogram",
+    "search": "potatoes",
+    "enabled": false,
+    "review_note": "Confirm matching names and package/comparison rules before enabling."
+  },
+  {
+    "id": "sweet_potatoes_per_kilogram",
+    "category": "Sweet potatoes",
+    "source_size": "per kilogram",
+    "search": "sweet potatoes",
+    "enabled": false,
+    "review_note": "Confirm matching names and package/comparison rules before enabling."
+  },
+  {
+    "id": "tomatoes_per_kilogram",
+    "category": "Tomatoes",
+    "source_size": "per kilogram",
+    "search": "tomatoes",
+    "enabled": false,
+    "review_note": "Confirm matching names and package/comparison rules before enabling."
+  },
+  {
+    "id": "cabbage_per_kilogram",
+    "category": "Cabbage",
+    "source_size": "per kilogram",
+    "search": "cabbage",
+    "enabled": false,
+    "review_note": "Confirm matching names and package/comparison rules before enabling."
+  },
+  {
+    "id": "carrots_1_36_kilograms",
+    "category": "Carrots",
+    "source_size": "1.36 kilograms",
+    "search": "carrots",
+    "enabled": false,
+    "review_note": "Confirm matching names and package/comparison rules before enabling."
+  },
+  {
+    "id": "onions_per_kilogram",
+    "category": "Onions",
+    "source_size": "per kilogram",
+    "search": "onions",
+    "enabled": false,
+    "review_note": "Confirm matching names and package/comparison rules before enabling."
+  },
+  {
+    "id": "onions_1_36_kilograms",
+    "category": "Onions",
+    "source_size": "1.36 kilograms",
+    "search": "onions",
+    "enabled": false,
+    "review_note": "Confirm matching names and package/comparison rules before enabling."
+  },
+  {
+    "id": "celery_unit",
+    "category": "Celery",
+    "source_size": "unit",
+    "search": "celery",
+    "enabled": false,
+    "review_note": "Confirm matching names and package/comparison rules before enabling."
+  },
+  {
+    "id": "cucumber_unit",
+    "category": "Cucumber",
+    "source_size": "unit",
+    "search": "cucumber",
+    "enabled": false,
+    "review_note": "Confirm matching names and package/comparison rules before enabling."
+  },
+  {
+    "id": "mushrooms_227_grams",
+    "category": "Mushrooms",
+    "source_size": "227 grams",
+    "search": "mushrooms",
+    "enabled": false,
+    "review_note": "Confirm matching names and package/comparison rules before enabling."
+  },
+  {
+    "id": "iceberg_lettuce_unit",
+    "category": "Iceberg lettuce",
+    "source_size": "unit",
+    "search": "iceberg lettuce",
+    "enabled": false,
+    "review_note": "Confirm matching names and package/comparison rules before enabling."
+  },
+  {
+    "id": "romaine_lettuce_unit",
+    "category": "Romaine lettuce",
+    "source_size": "unit",
+    "search": "romaine lettuce",
+    "enabled": false,
+    "review_note": "Confirm matching names and package/comparison rules before enabling."
+  },
+  {
+    "id": "broccoli_unit",
+    "category": "Broccoli",
+    "source_size": "unit",
+    "search": "broccoli",
+    "enabled": false,
+    "review_note": "Confirm matching names and package/comparison rules before enabling."
+  },
+  {
+    "id": "peppers_per_kilogram",
+    "category": "Peppers",
+    "source_size": "per kilogram",
+    "search": "peppers",
+    "enabled": false,
+    "review_note": "Confirm matching names and package/comparison rules before enabling."
+  },
+  {
+    "id": "squash_per_kilogram",
+    "category": "Squash",
+    "source_size": "per kilogram",
+    "search": "squash",
+    "enabled": false,
+    "review_note": "Confirm matching names and package/comparison rules before enabling."
+  },
+  {
+    "id": "salad_greens_142_grams",
+    "category": "Salad greens",
+    "source_size": "142 grams",
+    "search": "salad greens",
+    "enabled": false,
+    "review_note": "Confirm matching names and package/comparison rules before enabling."
+  },
+  {
+    "id": "frozen_french_fried_potatoes_750_grams",
+    "category": "Frozen french fried potatoes",
+    "source_size": "750 grams",
+    "search": "frozen french fried potatoes",
+    "enabled": false,
+    "review_note": "Confirm matching names and package/comparison rules before enabling."
+  },
+  {
+    "id": "frozen_green_beans_750_grams",
+    "category": "Frozen green beans",
+    "source_size": "750 grams",
+    "search": "frozen green beans",
+    "enabled": false,
+    "review_note": "Confirm matching names and package/comparison rules before enabling."
+  },
+  {
+    "id": "frozen_broccoli_500_grams",
+    "category": "Frozen broccoli",
+    "source_size": "500 grams",
+    "search": "frozen broccoli",
+    "enabled": false,
+    "review_note": "Confirm matching names and package/comparison rules before enabling."
+  },
+  {
+    "id": "frozen_corn_750_grams",
+    "category": "Frozen corn",
+    "source_size": "750 grams",
+    "search": "frozen corn",
+    "enabled": false,
+    "review_note": "Confirm matching names and package/comparison rules before enabling."
+  },
+  {
+    "id": "frozen_mixed_vegetables_750_grams",
+    "category": "Frozen mixed vegetables",
+    "source_size": "750 grams",
+    "search": "frozen mixed vegetables",
+    "enabled": false,
+    "review_note": "Confirm matching names and package/comparison rules before enabling."
+  },
+  {
+    "id": "frozen_peas_750_grams",
+    "category": "Frozen peas",
+    "source_size": "750 grams",
+    "search": "frozen peas",
+    "enabled": false,
+    "review_note": "Confirm matching names and package/comparison rules before enabling."
+  },
+  {
+    "id": "frozen_pizza_390_grams",
+    "category": "Frozen pizza",
+    "source_size": "390 grams",
+    "search": "frozen pizza",
+    "enabled": false,
+    "review_note": "Confirm matching names and package/comparison rules before enabling."
+  },
+  {
+    "id": "frozen_spinach_300_grams",
+    "category": "Frozen spinach",
+    "source_size": "300 grams",
+    "search": "frozen spinach",
+    "enabled": false,
+    "review_note": "Confirm matching names and package/comparison rules before enabling."
+  },
+  {
+    "id": "frozen_strawberries_600_grams",
+    "category": "Frozen strawberries",
+    "source_size": "600 grams",
+    "search": "frozen strawberries",
+    "enabled": false,
+    "review_note": "Confirm matching names and package/comparison rules before enabling."
+  },
+  {
+    "id": "white_bread_675_grams",
+    "category": "White bread",
+    "source_size": "675 grams",
+    "search": "white bread",
+    "enabled": false,
+    "review_note": "Confirm matching names and package/comparison rules before enabling."
+  },
+  {
+    "id": "flatbread_and_pita_500_grams",
+    "category": "Flatbread and pita",
+    "source_size": "500 grams",
+    "search": "flatbread and pita",
+    "enabled": false,
+    "review_note": "Confirm matching names and package/comparison rules before enabling."
+  },
+  {
+    "id": "crackers_and_crisp_breads_200_grams",
+    "category": "Crackers and crisp breads",
+    "source_size": "200 grams",
+    "search": "crackers and crisp breads",
+    "enabled": false,
+    "review_note": "Confirm matching names and package/comparison rules before enabling."
+  },
+  {
+    "id": "cookies_and_sweet_biscuits_300_grams",
+    "category": "Cookies and sweet biscuits",
+    "source_size": "300 grams",
+    "search": "cookies and sweet biscuits",
+    "enabled": false,
+    "review_note": "Confirm matching names and package/comparison rules before enabling."
+  },
+  {
+    "id": "dry_or_fresh_pasta_500_grams",
+    "category": "Dry or fresh pasta",
+    "source_size": "500 grams",
+    "search": "dry or fresh pasta",
+    "enabled": false,
+    "review_note": "Confirm matching names and package/comparison rules before enabling."
+  },
+  {
+    "id": "brown_rice_900_grams",
+    "category": "Brown rice",
+    "source_size": "900 grams",
+    "search": "brown rice",
+    "enabled": false,
+    "review_note": "Confirm matching names and package/comparison rules before enabling."
+  },
+  {
+    "id": "white_rice_2_kilograms",
+    "category": "White rice",
+    "source_size": "2 kilograms",
+    "search": "white rice",
+    "enabled": false,
+    "review_note": "Confirm matching names and package/comparison rules before enabling."
+  },
+  {
+    "id": "cereal_400_grams",
+    "category": "Cereal",
+    "source_size": "400 grams",
+    "search": "cereal",
+    "enabled": false,
+    "review_note": "Confirm matching names and package/comparison rules before enabling."
+  },
+  {
+    "id": "wheat_flour_2_5_kilograms",
+    "category": "Wheat flour",
+    "source_size": "2.5 kilograms",
+    "search": "wheat flour",
+    "enabled": false,
+    "review_note": "Confirm matching names and package/comparison rules before enabling."
+  },
+  {
+    "id": "white_sugar_2_kilograms",
+    "category": "White sugar",
+    "source_size": "2 kilograms",
+    "search": "white sugar",
+    "enabled": false,
+    "review_note": "Confirm matching names and package/comparison rules before enabling."
+  },
+  {
+    "id": "apple_juice_2_litres",
+    "category": "Apple juice",
+    "source_size": "2 litres",
+    "search": "apple juice",
+    "enabled": false,
+    "review_note": "Confirm matching names and package/comparison rules before enabling."
+  },
+  {
+    "id": "orange_juice_2_litres",
+    "category": "Orange juice",
+    "source_size": "2 litres",
+    "search": "orange juice",
+    "enabled": false,
+    "review_note": "Confirm matching names and package/comparison rules before enabling."
+  },
+  {
+    "id": "roasted_or_ground_coffee_340_grams",
+    "category": "Roasted or ground coffee",
+    "source_size": "340 grams",
+    "search": "roasted or ground coffee",
+    "enabled": false,
+    "review_note": "Confirm matching names and package/comparison rules before enabling."
+  },
+  {
+    "id": "tea_20_bags",
+    "category": "Tea",
+    "source_size": "20 bags",
+    "search": "tea",
+    "enabled": false,
+    "review_note": "Confirm matching names and package/comparison rules before enabling."
+  },
+  {
+    "id": "ketchup_1_litre",
+    "category": "Ketchup",
+    "source_size": "1 litre",
+    "search": "ketchup",
+    "enabled": false,
+    "review_note": "Confirm matching names and package/comparison rules before enabling."
+  },
+  {
+    "id": "vegetable_oil_3_litres",
+    "category": "Vegetable oil",
+    "source_size": "3 litres",
+    "search": "vegetable oil",
+    "enabled": false,
+    "review_note": "Confirm matching names and package/comparison rules before enabling."
+  },
+  {
+    "id": "canola_oil_3_litres",
+    "category": "Canola oil",
+    "source_size": "3 litres",
+    "search": "canola oil",
+    "enabled": false,
+    "review_note": "Confirm matching names and package/comparison rules before enabling."
+  },
+  {
+    "id": "olive_oil_1_litre",
+    "category": "Olive oil",
+    "source_size": "1 litre",
+    "search": "olive oil",
+    "enabled": false,
+    "review_note": "Confirm matching names and package/comparison rules before enabling."
+  },
+  {
+    "id": "baby_food_128_millilitres",
+    "category": "Baby food",
+    "source_size": "128 millilitres",
+    "search": "baby food",
+    "enabled": false,
+    "review_note": "Confirm matching names and package/comparison rules before enabling."
+  },
+  {
+    "id": "infant_formula_900_grams",
+    "category": "Infant formula",
+    "source_size": "900 grams",
+    "search": "infant formula",
+    "enabled": false,
+    "review_note": "Confirm matching names and package/comparison rules before enabling."
+  },
+  {
+    "id": "peanut_butter_1_kilogram",
+    "category": "Peanut butter",
+    "source_size": "1 kilogram",
+    "search": "peanut butter",
+    "enabled": false,
+    "review_note": "Confirm matching names and package/comparison rules before enabling."
+  },
+  {
+    "id": "mayonnaise_890_millilitres",
+    "category": "Mayonnaise",
+    "source_size": "890 millilitres",
+    "search": "mayonnaise",
+    "enabled": false,
+    "review_note": "Confirm matching names and package/comparison rules before enabling."
+  },
+  {
+    "id": "canned_baked_beans_398_millilitres",
+    "category": "Canned baked beans",
+    "source_size": "398 millilitres",
+    "search": "canned baked beans",
+    "enabled": false,
+    "review_note": "Confirm matching names and package/comparison rules before enabling."
+  },
+  {
+    "id": "canned_tomatoes_796_millilitres",
+    "category": "Canned tomatoes",
+    "source_size": "796 millilitres",
+    "search": "canned tomatoes",
+    "enabled": false,
+    "review_note": "Confirm matching names and package/comparison rules before enabling."
+  },
+  {
+    "id": "canned_soup_284_millilitres",
+    "category": "Canned soup",
+    "source_size": "284 millilitres",
+    "search": "canned soup",
+    "enabled": false,
+    "review_note": "Confirm matching names and package/comparison rules before enabling."
+  },
+  {
+    "id": "canned_beans_and_lentils_540_millilitres",
+    "category": "Canned beans and lentils",
+    "source_size": "540 millilitres",
+    "search": "canned beans and lentils",
+    "enabled": false,
+    "review_note": "Confirm matching names and package/comparison rules before enabling."
+  },
+  {
+    "id": "canned_corn_341_millilitres",
+    "category": "Canned corn",
+    "source_size": "341 millilitres",
+    "search": "canned corn",
+    "enabled": false,
+    "review_note": "Confirm matching names and package/comparison rules before enabling."
+  },
+  {
+    "id": "canned_peach_398_millilitres",
+    "category": "Canned peach",
+    "source_size": "398 millilitres",
+    "search": "canned peach",
+    "enabled": false,
+    "review_note": "Confirm matching names and package/comparison rules before enabling."
+  },
+  {
+    "id": "canned_pear_398_millilitres",
+    "category": "Canned pear",
+    "source_size": "398 millilitres",
+    "search": "canned pear",
+    "enabled": false,
+    "review_note": "Confirm matching names and package/comparison rules before enabling."
+  },
+  {
+    "id": "dried_lentils_900_grams",
+    "category": "Dried lentils",
+    "source_size": "900 grams",
+    "search": "dried lentils",
+    "enabled": false,
+    "review_note": "Confirm matching names and package/comparison rules before enabling."
+  },
+  {
+    "id": "dry_beans_and_legumes_900_grams",
+    "category": "Dry beans and legumes",
+    "source_size": "900 grams",
+    "search": "dry beans and legumes",
+    "enabled": false,
+    "review_note": "Confirm matching names and package/comparison rules before enabling."
+  },
+  {
+    "id": "tofu_350_grams",
+    "category": "Tofu",
+    "source_size": "350 grams",
+    "search": "tofu",
+    "enabled": false,
+    "review_note": "Confirm matching names and package/comparison rules before enabling."
+  },
+  {
+    "id": "hummus_227_grams",
+    "category": "Hummus",
+    "source_size": "227 grams",
+    "search": "hummus",
+    "enabled": false,
+    "review_note": "Confirm matching names and package/comparison rules before enabling."
+  },
+  {
+    "id": "salsa_418_millilitres",
+    "category": "Salsa",
+    "source_size": "418 millilitres",
+    "search": "salsa",
+    "enabled": false,
+    "review_note": "Confirm matching names and package/comparison rules before enabling."
+  },
+  {
+    "id": "pasta_sauce_650_millilitres",
+    "category": "Pasta sauce",
+    "source_size": "650 millilitres",
+    "search": "pasta sauce",
+    "enabled": false,
+    "review_note": "Confirm matching names and package/comparison rules before enabling."
+  },
+  {
+    "id": "salad_dressing_475_millilitres",
+    "category": "Salad dressing",
+    "source_size": "475 millilitres",
+    "search": "salad dressing",
+    "enabled": false,
+    "review_note": "Confirm matching names and package/comparison rules before enabling."
+  },
+  {
+    "id": "almonds_200_grams",
+    "category": "Almonds",
+    "source_size": "200 grams",
+    "search": "almonds",
+    "enabled": false,
+    "review_note": "Confirm matching names and package/comparison rules before enabling."
+  },
+  {
+    "id": "peanuts_450_grams",
+    "category": "Peanuts",
+    "source_size": "450 grams",
+    "search": "peanuts",
+    "enabled": false,
+    "review_note": "Confirm matching names and package/comparison rules before enabling."
+  },
+  {
+    "id": "sunflower_seeds_400_grams",
+    "category": "Sunflower seeds",
+    "source_size": "400 grams",
+    "search": "sunflower seeds",
+    "enabled": false,
+    "review_note": "Confirm matching names and package/comparison rules before enabling."
+  },
+  {
+    "id": "deodorant_85_grams",
+    "category": "Deodorant",
+    "source_size": "85 grams",
+    "search": "deodorant",
+    "enabled": false,
+    "review_note": "Confirm matching names and package/comparison rules before enabling."
+  },
+  {
+    "id": "toothpaste_100_millilitres",
+    "category": "Toothpaste",
+    "source_size": "100 millilitres",
+    "search": "toothpaste",
+    "enabled": false,
+    "review_note": "Confirm matching names and package/comparison rules before enabling."
+  },
+  {
+    "id": "shampoo_400_millilitres",
+    "category": "Shampoo",
+    "source_size": "400 millilitres",
+    "search": "shampoo",
+    "enabled": false,
+    "review_note": "Confirm matching names and package/comparison rules before enabling."
+  },
+  {
+    "id": "laundry_detergent_4_43_litres",
+    "category": "Laundry detergent",
+    "source_size": "4.43 litres",
+    "search": "laundry detergent",
+    "enabled": false,
+    "review_note": "Confirm matching names and package/comparison rules before enabling."
   }
 ]

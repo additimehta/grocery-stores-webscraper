@@ -1,42 +1,41 @@
 import csv
-import json
 import tempfile
 import unittest
 from pathlib import Path
-from scraper import parse_product, write_csv
+from unittest.mock import patch
+from scraper import collect, load_config, make_row, write_csv
+from matching import select_cheapest
 
 
 class ScraperTests(unittest.TestCase):
-    def setUp(self):
-        self.target = {"category": "test", "url": "https://www.loblaws.ca/en/test/p/123_EA"}
-        self.product = {"@type": "Product", "sku": "123_EA", "name": 'Test, "eggs"',
-                        "offers": {"price": "4.99", "priceCurrency": "CAD"}}
+    def test_config_catalog(self):
+        products, stores = load_config('products.json', 'stores.json')
+        self.assertEqual(len(products), 3)
+        self.assertEqual(stores[0]['adapter'], 'loblaws')
 
-    def test_graph_and_csv_roundtrip(self):
-        row = parse_product([json.dumps({"@graph": [self.product]})], self.target)
+    def test_shared_search_and_csv_roundtrip(self):
+        rules, stores = load_config('products.json', 'stores.json')
+        candidates = [dict(name='2% Milk', brand='Brand, "A"', size=f'{litres} l',
+            price=price, currency='CAD', available=True, product_id=str(litres),
+            product_url='https://www.loblaws.ca/en/milk/p/test', image_url='')
+            for litres, price in [(1,'3.64'), (4,'6.44')]]
+        milk = [p for p in rules if p['category'] == 'Milk']
+        with patch('scraper.loblaws.search', return_value=(candidates, 'Store')) as search:
+            rows, audit, errors = collect(None, milk, stores)
+        self.assertEqual(search.call_count, 1)
+        self.assertEqual(errors, [])
+        self.assertEqual(len(rows), 2)
         with tempfile.TemporaryDirectory() as directory:
-            path = Path(directory) / "products.csv"
-            write_csv(path, [row])
-            with path.open(newline="", encoding="utf-8") as handle:
-                result = next(csv.DictReader(handle))
-            self.assertEqual(result["name"], 'Test, "eggs"')
-            self.assertEqual(result["price"], "4.99")
-            self.assertEqual(result["size"], "")
+            path = Path(directory)/'output.csv'
+            write_csv(path, rows)
+            with path.open(newline='') as file:
+                result=list(csv.DictReader(file))
+            self.assertEqual(result[0]['brand'], 'Brand, "A"')
+            self.assertEqual(result[0]['package_price'], '3.64')
 
-    def test_missing_price_is_not_zero(self):
-        self.product["offers"] = {}
-        with self.assertRaises(ValueError):
-            parse_product([json.dumps(self.product)], self.target)
-
-    def test_wrong_product_rejected(self):
-        self.product["sku"] = "456_EA"
-        with self.assertRaises(ValueError):
-            parse_product([json.dumps(self.product)], self.target)
-
-    def test_app_shell_rejected(self):
-        with self.assertRaises(ValueError):
-            parse_product([], self.target)
-
-
-if __name__ == "__main__":
-    unittest.main()
+    def test_missing_result_reported(self):
+        products, stores = load_config('products.json', 'stores.json')
+        with patch('scraper.loblaws.search', return_value=([], 'Store')):
+            rows, audit, errors = collect(None, products[:1], stores)
+        self.assertFalse(rows)
+        self.assertEqual(len(errors), 1)

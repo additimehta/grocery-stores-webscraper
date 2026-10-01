@@ -4,7 +4,9 @@ A small Python starter for collecting selected grocery products into a CSV for t
 
 ## Status
 
-Initial scaffold, not a verified working Loblaws scraper yet. A normal request returned a JavaScript app shell during investigation. The script uses Playwright and attempts to extract Product JSON-LD after rendering. Whether Loblaws provides that markup in a live browser still needs verification. If it does not, the extraction adapter needs to be updated using the actual page or product response. Chromium could not be installed in the development environment, so live scraping has not been tested. No real scraped dataset is included.
+On October 1, 2026, the sample eggs page loaded in the available cloud browser and exposed Product JSON-LD. Passing that live-page JSON-LD through the Python parser and CSV writer correctly exported Grade A Large Eggs, Burnbrae Farms, CAD 6.98, product ID, and image URL. The page showed Loblaws Baseline Road as the selected store.
+
+This verifies the sample page's data format and the Python parsing/export stages, not the full standalone Playwright command. Local Chromium installation failed in the development environment, so browser startup and navigation through the Python script still need a local end-to-end test. The page displays 18 ea, but its JSON-LD omits size, so the current parser leaves size blank. Other product pages and store selection are not verified. No scraped dataset is included.
 
 ## Setup (Mac)
 
